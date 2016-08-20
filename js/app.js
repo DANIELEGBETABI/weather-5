@@ -1,48 +1,30 @@
-navigator.geolocation.getCurrentPosition(function(position) {
-  $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&units=imperial&APPID=b535e8bc0e5402bb399f4994e847e3b3', function(json){
-    var tempInfo = '';
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+  $.getJSON("https://api.wunderground.com/api/099ff2702a458d9e/conditions/q/" + position.coords.latitude + "," + position.coords.longitude + ".json", function(json){
     var icon;
     var units = 'F';
 
-    if (json['cod'] === '404'){
-      $('#justTemp').html("<h3>Oops! We're having trouble finding the weather near you.</h3>")
-    }
-
-    switch (json['weather'][0]['main']){
-      case 'Rain':
-        icon = "R"
-        break;
-      case 'Snow':
-        icon = "W"
-        break;
-      case 'Clouds':
-        icon = "Y"
-      break;
-      case 'Clear':
-        icon = "A"
-        break;
-      case 'Thunderstorm':
-        icon = "A"
-        break;
-      case 'Dizzle':
-        icon = "Q"
-        break;
-    }
-    
     $('#units').on('click', function(){
       if (units === 'F'){
         units = 'C';
-        json['main']['temp'] = (json['main']['temp'] - 32) * (5/9);
+        json.current_observation.temp_f = (json.current_observation.temp_f - 32) * (5/9);
       } else {
         units = 'F';
-        json['main']['temp'] = json['main']['temp'] * 1.8 + 32;
+        json.current_observation.temp_f = json.current_observation.temp_f * 1.8 + 32;
       }
-      $('#justTemp').html('<h2> ' + parseInt(json['main']['temp']) + ' ° ' + units + '</h2>');
+      $('#justTemp').html('<h2> ' + parseInt(json.current_observation.temp_f) + ' ° ' + units + '</h2>');
     });
 
-    $('#location').html('<h1>' + json['name'] + ' </h1>');
-    $('#justTemp').html('<h2> ' + parseInt(json['main']['temp']) + ' ° ' + units + '</h2>');
-    $('#image').html('<p data-icon="' + icon + '"></p>')
-    $('#humid').html('<h3>Humidity: </strong>' + json['main']['humidity'] + '%');
+    $('#location').html('<h1>' + json.current_observation.display_location.full + ' </h1>');
+    $('#justTemp').html('<h2> ' + parseInt(json.current_observation.temp_f) + ' ° ' + units + '</h2>');
+    $('#image').html('<img src="' + json.current_observation.icon_url + '">');
+    $('#humid').html('<h3>Humidity: </strong>' + json.current_observation.relative_humidity);
+  }).fail(function(jqXHR){
+    if (jqXHR.status !== 200){
+      $('#justTemp').html("<h3>Oops! We're having trouble finding the weather near you.</h3>");
+    }
   });
 });
+} else {
+  $('#justTemp').html('<h3>Please enable geolocation for this page to report the weather.</h3>');
+}
