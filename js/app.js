@@ -3,7 +3,6 @@ if (navigator.geolocation) {
   $.getJSON("https://api.wunderground.com/api/099ff2702a458d9e/conditions/q/" + position.coords.latitude + "," + position.coords.longitude + ".json", function(json){
     var icon;
     var units = 'F';
-
     $('#units').on('click', function(){
       if (units === 'F'){
         units = 'C';
@@ -14,7 +13,6 @@ if (navigator.geolocation) {
       }
       $('#justTemp').html('<h2> ' + parseInt(json.current_observation.temp_f) + ' ° ' + units + '</h2>');
     });
-
     $('#location').html('<h1>' + json.current_observation.display_location.full + ' </h1>');
     $('#justTemp').html('<h2> ' + parseInt(json.current_observation.temp_f) + ' ° ' + units + '</h2>');
     $('#image').html('<img src="' + json.current_observation.icon_url + '">');
@@ -26,5 +24,5 @@ if (navigator.geolocation) {
   });
 });
 } else {
-  $('#justTemp').html('<h3>Please enable geolocation for this page to report the weather.</h3>');
+  $('#justTemp').html('<h3>Browser geolocation required for this page to report the weather.</h3>');
 }
