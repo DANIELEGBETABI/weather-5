@@ -3,6 +3,7 @@ html {
   font-size: 1.1em;
   letter-spacing: 2px;
   height: 100%;
+  background: -webkit-linear-gradient(#000099, #000033);
   background: linear-gradient(#000099, #000033);
   background-attachment: fixed;
 }
@@ -28,16 +29,27 @@ header {
 }
 
 #tempShow {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   margin: 100px auto 25px;
+  background: -webkit-linear-gradient(315deg, #d9d9d9, #737373);
   background: linear-gradient(135deg, #d9d9d9, #737373);
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-  animation: fadein .75s;
+  -webkit-animation: fadein .75s;
+          animation: fadein .75s;
 }
 
 #tempShow p {
@@ -56,6 +68,7 @@ header {
 }
 
 #units:hover {
+  -webkit-transition: background-color .25s;
   transition: background-color .25s;
   cursor: pointer;
   background-color: rgb(34, 119, 34);
@@ -69,17 +82,12 @@ header {
     }
   }
 
-  @keyframes fadein {
+  @-webkit-keyframes fadein {
       from { opacity: 0; }
       to   { opacity: 1; }
   }
 
-  /* @keyframes slidein {
-  from {
-    margin-left: 100%;
+  @keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
   }
-
-  to {
-    margin-left: 46.5%;
-  }
-} */
