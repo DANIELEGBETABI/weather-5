@@ -1,0 +1,75 @@
+html {
+  font-family: 'Chewy';
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  height: 100%;
+  background: linear-gradient(#000099, #000033);
+  background-attachment: fixed;
+}
+
+header {
+  margin: 0 auto;
+  color: #f2f2f2;
+  text-align: center;
+  font-size: 2em;
+}
+
+[data-icon]:before {
+	font-family: 'MeteoconsRegular';
+  font-size: 90px;
+  color: #f2f2f2;
+	content: attr(data-icon);
+}
+
+#justTemp {
+  text-align: center;
+}
+
+#tempShow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 100px auto 10px;
+  background: linear-gradient(135deg, #d9d9d9, #737373);
+  border-radius: 10px 10px 10px 10px;
+}
+
+#tempShow p {
+  margin: 0;
+}
+
+#units {
+  width: 130px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0 auto;
+  text-align: center;
+  color: #f2f2f2;
+  background: rgb(57, 198, 57);
+  border-radius: 5px;
+}
+
+#units:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 692px) {
+    #tempShow {
+      width: 400px;
+      height: 400px;
+      border-radius: 100%;
+    }
+  }
+
+  @font-face {
+    font-family: 'MeteoconsRegular';
+    src: url('/font/meteocons-webfont.eot');
+    src: url('/font/meteocons-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/font/meteocons-webfont.woff') format('woff'),
+         url('/font/meteocons-webfont.ttf') format('truetype'),
+         url('/font/meteocons-webfont.svg#MeteoconsRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
