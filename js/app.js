@@ -1,7 +1,8 @@
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
   $.getJSON("https://api.wunderground.com/api/099ff2702a458d9e/conditions/q/" + position.coords.latitude + "," + position.coords.longitude + ".json", function(json){
-    var icon;
+    var icon = json.current_observation.icon_url.replace(/http/g, 'https');
+    console.log(icon);
     var units = 'F';
     $('#units').on('click', function(){
       if (units === 'F'){
@@ -15,7 +16,7 @@ if (navigator.geolocation) {
     });
     $('#location').html('<h1>' + json.current_observation.display_location.full + ' </h1>');
     $('#justTemp').html('<h2> ' + parseInt(json.current_observation.temp_f) + ' ° ' + units + '</h2>');
-    $('#image').html('<img src="' + json.current_observation.icon_url + '">');
+    $('#image').html('<img src="' + icon + '">');
     $('#humid').html('<h3>Humidity: </strong>' + json.current_observation.relative_humidity);
   }).fail(function(jqXHR){
     if (jqXHR.status !== 200){

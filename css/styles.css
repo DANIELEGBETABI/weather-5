@@ -24,6 +24,11 @@ header {
   z-index: -10;
 }
 
+#image {
+  background: #eee;
+  border-radius: 100%;
+}
+
 #justTemp {
   text-align: center;
 }
