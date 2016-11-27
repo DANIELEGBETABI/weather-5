@@ -6,11 +6,11 @@ if ("geolocation" in navigator) {
     var units = 'F';
     $('#units').on('click', function(){
       if (units === 'F'){
-        this.innerHTML = "Farenheit";
+        this.innerHTML = "Show °F";
         units = 'C';
         json.current_observation.temp_f = (json.current_observation.temp_f - 32) * (5/9);
       } else {
-        this.innerHTML = "Celsius";
+        this.innerHTML = "Show °C";
         units = 'F';
         json.current_observation.temp_f = json.current_observation.temp_f * 1.8 + 32;
       }
